@@ -16,6 +16,9 @@ repos:
   - repo: local
     hooks:
       - id: migrations-check
+        # in local dev env,
+        # acitvate the python venv in cli
+        # open the git commit IDE,  like VS Code`code .` or SourceTree
         language: system
         name: Check for uncreated migrations.
         entry: sh -c "python manage.py makemigrations --check --dry-run"
