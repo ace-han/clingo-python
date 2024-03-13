@@ -24,6 +24,18 @@ pytest-playwright = "^0.4.4"
 pre-commit = "^3.6.2"
 ruff = "^0.3.2"
 
+[tool.ruff]
+lint.extend-select = ["D", "I", "ISC002", "PIE", "PT", "T20", "UP"]
+lint.ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "D202", "D203", "D206", "D213", "D407", "PT019"]
+target-version = "py311"
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
+[tool.ruff.lint.isort]
+known-first-party = ["clingo"]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

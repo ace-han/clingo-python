@@ -1,8 +1,5 @@
-from django.db import models
-
 # Create your models here.
-'''
-User
+"""User.
 
 SocialMediaGroup
  user
@@ -17,11 +14,11 @@ SocialMediaAccount
   nickname
   avatarUrl
   remark
-  
+
 
 SocialMediaPost
   socialmediaaccount
   videoclip
   stacktrace
   created_at
-'''
+"""
