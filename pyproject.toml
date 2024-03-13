@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "clingo"
+version = "0.1.0"
+description = "Learn languages by watching video clips"
+authors = ["Ace"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "clingo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+youtube-dl = {git = "https://github.com/ytdl-org/ytdl-nightly.git", rev = "2024.02.03"}
+playwright = "^1.41.2"
+moviepy = {git = "https://github.com/Zulko/moviepy.git"}
+vtt-to-srt3 = "^0.2.0.1"
+pydeeplx = "^1.0.7"
+django = "^5.0.3"
+django-environ = "^0.11.2"
+
+
+
+[tool.poetry.group.dev.dependencies]
+pytest-playwright = "^0.4.4"
+pre-commit = "^3.6.2"
+ruff = "^0.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

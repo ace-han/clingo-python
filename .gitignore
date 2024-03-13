@@ -1,0 +1,38 @@
+# copy from saleor
+*.py[cod]
+.*
+!.devcontainer
+!.dockerignore
+!.github
+!.gitignore
+!.vscode
+!.editorconfig
+!.pre-commit-config.yaml
+*.log
+*.pot
+*.pyc
+__pycache__/
+build/
+coverage/
+dist/
+*\.egg*
+
+# data
+/media/
+/static/
+/digital_contents/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Exported results file
+django-queries-results.html
+
+# test db
+db.sqlite3
