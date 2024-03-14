@@ -23,6 +23,7 @@ django-environ = "^0.11.2"
 pytest-playwright = "^0.4.4"
 pre-commit = "^3.6.2"
 ruff = "^0.3.2"
+mypy = "^1.9.0"
 
 [tool.ruff]
 lint.extend-select = ["D", "I", "ISC002", "PIE", "PT", "T20", "UP"]
@@ -35,6 +36,17 @@ mark-parentheses = false
 
 [tool.ruff.lint.isort]
 known-first-party = ["clingo"]
+
+[tool.mypy]
+pretty = True
+show_column_numbers = True
+show_error_codes = True
+show_error_context = True
+plugins =
+    mypy_django_plugin.main
+
+[tool.mypy.plugins.django-stubs]
+django_settings_module = clingo.settings
 
 [build-system]
 requires = ["poetry-core"]
