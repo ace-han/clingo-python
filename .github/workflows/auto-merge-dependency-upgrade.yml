@@ -1,10 +1,10 @@
 name: Dependabot auto-approve
 on: pull_request_target
-    
+
 permissions:
   contents: write
   pull-requests: write
-    
+
 jobs:
   dependabot:
     # needs: [build, e2e] # TODO (add later). After the E2E and build jobs, if one of them fails, it won't merge the PR.
@@ -17,6 +17,8 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: auto-merge for Dependabot PRs
+        # TODO enable some check here
+        # if: steps.metadata.outputs.dependency-type == 'direct:production'
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
