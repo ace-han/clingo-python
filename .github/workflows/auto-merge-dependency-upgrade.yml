@@ -1,25 +1,95 @@
-name: Dependabot auto-approve
-on: pull_request_target
+name: Dependencies auto merge
 
-permissions:
-  contents: write
-  pull-requests: write
+on:
+  workflow_dispatch:
+  pull_request_target:
 
 jobs:
-  dependabot:
-    # needs: [build, e2e] # TODO (add later). After the E2E and build jobs, if one of them fails, it won't merge the PR.
+  test:
     runs-on: ubuntu-latest
+    # refer to
+    # https://hugo.alliau.me/2021/05/04/migration-to-github-native-dependabot-solutions-for-auto-merge-and-action-secrets/#share-your-secrets-with-dependabot
+    # If the PR is coming from a fork (pull_request_target), ensure it's opened by "dependabot[bot]".
+    # Otherwise, clone it normally.
+    # if: |
+    #     (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          # align with default DATABASE_URL in settings.py
+          POSTGRES_PASSWORD: clingo
+          POSTGRES_USER: clingo
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Dependencies
+        run: poetry install --no-interaction --no-root
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+
+      - name: Test with pytest
+        env:
+          DJANGO_SETTINGS_MODULE: clingo.settings
+        run: |
+          source $VENV
+          pytest --cov=. --cov-report=json
+
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.json
+          flags: overall
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: pytest-results
+          path: ./coverage.xml
+        if: ${{ always() }}
+
+  auto_approve:
+    runs-on: ubuntu-latest
+    needs: [test]
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v1
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ secrets.MY_PAT }}"
       - name: auto-merge for Dependabot PRs
         # TODO enable some check here
         # if: steps.metadata.outputs.dependency-type == 'direct:production'
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{secrets.MY_PAT}}
