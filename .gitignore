@@ -13,7 +13,6 @@
 *.pyc
 __pycache__/
 build/
-coverage/
 dist/
 *\.egg*
 
@@ -36,3 +35,7 @@ django-queries-results.html
 
 # test db
 db.sqlite3
+
+# pytest coverage
+coverage.*
+htmlcov
