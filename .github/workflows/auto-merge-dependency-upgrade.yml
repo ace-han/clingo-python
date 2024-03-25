@@ -18,7 +18,6 @@ jobs:
       postgres:
         image: postgres
         env:
-          # align with default DATABASE_URL in settings.py
           POSTGRES_PASSWORD: clingo
           POSTGRES_USER: clingo
         options: >-
@@ -74,7 +73,7 @@ jobs:
       - uses: actions/upload-artifact@v3.1.2
         with:
           name: pytest-results
-          path: ./coverage.xml
+          path: ./coverage.json
         if: ${{ always() }}
 
   auto_approve:
