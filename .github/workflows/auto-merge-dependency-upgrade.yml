@@ -17,6 +17,8 @@ jobs:
     services:
       postgres:
         image: postgres
+        ports:
+          - 5432:5432
         env:
           # align with default DATABASE_URL in settings.py
           POSTGRES_PASSWORD: clingo
