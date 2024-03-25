@@ -82,7 +82,7 @@ WSGI_APPLICATION = "clingo.wsgi.application"
 
 DATABASES = {
     "default": env.db_url(
-        "DATABASE_URL", default="sqlite:///" + str(BASE_DIR / "db.sqlite3")
+        "DATABASE_URL", default="postgres://clingo:clingo@localhost:5432/clingo"
     ),
 }
 
@@ -124,7 +124,7 @@ MEDIA_ROOT = str(MEDIA_DIR)
 
 MEDIA_URL = env.str("MEDIA_URL", "/media/")
 
-STATIC_DIR = BASE_DIR / "media"
+STATIC_DIR = BASE_DIR / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)
 STATIC_ROOT = str(STATIC_DIR)
 # Static files (CSS, JavaScript, Images)
@@ -135,3 +135,5 @@ STATIC_URL = env.str("STATIC_URL", "/static/")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+TEST_RUNNER = "clingo.tests.runner.PytestTestRunner"
