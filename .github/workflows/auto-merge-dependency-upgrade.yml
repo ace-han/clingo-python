@@ -93,7 +93,26 @@ jobs:
       - name: auto-merge for Dependabot PRs
         # TODO enable some check here
         # if: steps.metadata.outputs.dependency-type == 'direct:production'
-        run: gh pr review --approve "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GH_TOKEN: ${{secrets.MY_PAT}}
+        uses: fastify/github-action-merge-dependabot@v3
+        with:
+          github-token: ${{secrets.MY_PAT}}
+          merge-method: rebase
+      # - name: Auto-merge
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       const { pull_request } = context.payload;
+      #       github.rest.pulls.createReview({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         pull_request_number: pull_request.number,
+      #         event: 'APPROVE',
+      #       });
+      #       github.rest.pulls.merge({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         pull_request_number: pull_request.number,
+      #         merge_method: 'squash', // or 'merge' or 'rebase'
+      #       });
+      #     env:
+      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
