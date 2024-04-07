@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v4.5.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -8,7 +8,7 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.5
+    rev: v0.3.2
     hooks:
       - id: ruff
       - id: ruff-format
@@ -17,9 +17,23 @@ repos:
     rev: v1.9.0
     hooks:
       - id: mypy
-        # so that it could use the config (like pyproject.toml) in out project
-        language: system
+        # so that it could use the config (like pyproject.toml) in out project (deprecated)
+        # refer to
+        # https://stackoverflow.com/questions/72888074/how-to-configure-pre-commit-config-yaml-to-work-with-poetry
+        # that way you don't have to have your contributors worry about installing each and every tool at the required version
+
+        # we should avoid do pre-commit without `language: system` as much as possible
+        # `language: system` means it is on your contributors to have things set up properly and at the proper versions
+        # and with the proper virtualenv activated and with the proper versions installed in the virtualenv
+        # which is error prone and generally a bad experience
+
+        # language: system
         exclude: tests/
+        additional_dependencies:
+          # we need to elaborate the additional dependencies redundantly with pyproject.toml
+          - psycopg2-binary
+          - django-environ
+          - django-stubs
 
   - repo: local
     hooks:
