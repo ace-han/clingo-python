@@ -115,11 +115,25 @@ jobs:
               pull_request_number: pull_request.number,
               event: 'APPROVE',
             });
-            github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_request_number: pull_request.number,
-              merge_method: 'rebase', // 'squash' or 'merge' or 'rebase'
-            });
+            try {
+              const mergeRes = awaitgithub.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_request_number: pull_request.number,
+                merge_method: 'rebase', // 'squash' or 'merge' or 'rebase'
+              });
+              if (mergeRes.data.merged) {
+                console.log(`Pull request #${pull_request.number} merged successfully.`);
+                const branch = pull_request.head.ref;
+                await github.rest.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: `heads/${branch}`,
+                });
+                console.log(`Branch '${branch}' deleted successfully.`);
+              }
+            } catch (error) {
+              console.error('Error during auto-merge or branch deletion: ',  error);
+            }
           env:
             GITHUB_TOKEN: ${{ secrets.MY_PAT }}
