@@ -110,14 +110,14 @@ jobs:
           github-token: ${{secrets.MY_PAT}}
           script: |
             const { pull_request } = context.payload;
-            github.rest.pulls.createReview({
+            await github.rest.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_request_number: pull_request.number,
               event: 'APPROVE',
             });
             try {
-              const mergeRes = awaitgithub.rest.pulls.merge({
+              const mergeRes = await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_request_number: pull_request.number,
