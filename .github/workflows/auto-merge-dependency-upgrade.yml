@@ -113,14 +113,15 @@ jobs:
             await github.rest.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_request_number: pull_request.number,
+              pull_number: pull_request.number,
               event: 'APPROVE',
+              body: '',
             });
             try {
               const mergeRes = await github.rest.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_request_number: pull_request.number,
+                pull_number: pull_request.number,
                 merge_method: 'rebase', // 'squash' or 'merge' or 'rebase'
               });
               if (mergeRes.data.merged) {
