@@ -14,7 +14,7 @@ class GroupFactory(DjangoModelFactory):
     class Meta:
         model = Group
 
-    name = factory.Sequence(lambda n: "Group #%s" % n)
+    name = factory.Sequence(lambda n: f"Group #{n}")
 
 
 class UserFactory(DjangoModelFactory):
