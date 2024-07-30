@@ -1844,13 +1844,13 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "vtt-to-srt3"
-version = "0.2.0.1"
+version = "0.2.0.3"
 description = "vtt to srt subtitles converter package"
 optional = false
 python-versions = "*"
 files = [
-    {file = "vtt_to_srt3-0.2.0.1-py3-none-any.whl", hash = "sha256:d28a6a3598d2805432383810e500bc97b038681c4081ac6962404cc6b92989bd"},
-    {file = "vtt_to_srt3-0.2.0.1.tar.gz", hash = "sha256:398cc33b094f59c051c7077170f607985433e5ba0d8393cedb426e4c823f1bf7"},
+    {file = "vtt_to_srt3-0.2.0.3-py3-none-any.whl", hash = "sha256:c22686a2795ee931ebe72bfd074ee99b43e45a9155af98e1f0a249e6d871010a"},
+    {file = "vtt_to_srt3-0.2.0.3.tar.gz", hash = "sha256:b61fb7568d937a71101abbc661825cbc72565e562dc7bdf5d63596b433279c6d"},
 ]
 
 [[package]]
@@ -1871,4 +1871,4 @@ resolved_reference = "2547f3b0f95c5184af5e469f62147472af9dac6d"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "07ffeb3e38f6428289f408c59cb2321abb0c5338762b137580ab0eee4dd3338b"
+content-hash = "c9555431a1da23d99689317acb3ba00ec148dcaa97f709669993ce380ca1efa2"
