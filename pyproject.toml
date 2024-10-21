@@ -23,7 +23,7 @@ psycopg2-binary = "^2.9.9"
 [tool.poetry.group.dev.dependencies]
 pytest-playwright = "^0.5.2"
 pre-commit = "^4.0.1"
-ruff = "^0.6.9"
+ruff = "^0.7.0"
 mypy = "^1.12.1"
 django-stubs = "^5.1.0"
 django-stubs-ext = "^5.0.0"
