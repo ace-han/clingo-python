@@ -45,7 +45,7 @@ repos:
         name: Check for uncreated migrations.
         entry: sh -c "python manage.py makemigrations --check --dry-run"
         files: "models\\.py$"
-        stages: [Nonepre-commitNone]
+        stages: [commit]
 
 # enable pre-commit.ci
 # refer to https://pre-commit.ci/
