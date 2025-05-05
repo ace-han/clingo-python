@@ -10,7 +10,7 @@ packages = [{include = "clingo"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 youtube-dl = {git = "https://github.com/ytdl-org/ytdl-nightly.git", rev = "2024.02.03"}
-playwright = "^1.51.0"
+playwright = "^1.52.0"
 moviepy = {git = "https://github.com/Zulko/moviepy.git"}
 vtt-to-srt3 = "^0.2.0.4"
 pydeeplx = "^1.0.7"
