@@ -32,7 +32,7 @@ pytest-django = "^4.11.1"
 pytest-django-queries = "^1.2.0"
 pytest-factoryboy = "^2.8.1"
 pytest-html = "^4.1.1"
-pytest-mock = "^3.15.0"
+pytest-mock = "^3.15.1"
 
 [tool.ruff]
 lint.extend-select = ["D", "I", "ISC002", "PIE", "PT", "T20", "UP"]
