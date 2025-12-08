@@ -631,14 +631,14 @@ redis = ["redis", "types-redis"]
 
 [[package]]
 name = "django-stubs-ext"
-version = "5.2.7"
+version = "5.2.8"
 description = "Monkey-patching and extensions for django-stubs"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "django_stubs_ext-5.2.7-py3-none-any.whl", hash = "sha256:0466a7132587d49c5bbe12082ac9824d117a0dedcad5d0ada75a6e0d3aca6f60"},
-    {file = "django_stubs_ext-5.2.7.tar.gz", hash = "sha256:b690655bd4cb8a44ae57abb314e0995dc90414280db8f26fff0cb9fb367d1cac"},
+    {file = "django_stubs_ext-5.2.8-py3-none-any.whl", hash = "sha256:1dd5470c9675591362c78a157a3cf8aec45d0e7a7f0cf32f227a1363e54e0652"},
+    {file = "django_stubs_ext-5.2.8.tar.gz", hash = "sha256:b39938c46d7a547cd84e4a6378dbe51a3dd64d70300459087229e5fee27e5c6b"},
 ]
 
 [package.dependencies]
@@ -2070,4 +2070,4 @@ resolved_reference = "2547f3b0f95c5184af5e469f62147472af9dac6d"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "bdb2eb79ed2a5eab6c30217ec34a7a724b747aa12b03e1d66a6f3067b62a7b69"
+content-hash = "9d705d6f8961a486ebd983010dcd7cbada7f94ed1e76f0121be9c1abf2775a0c"
